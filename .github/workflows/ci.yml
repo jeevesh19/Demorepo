@@ -1,0 +1,40 @@
+name: Front-End CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint  # Adjust this if using a different lint command
+
+      - name: Build project
+        run: npm run build  # Adjust this if your build command is different
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage/  # Adjust if your coverage report is stored elsewhere
