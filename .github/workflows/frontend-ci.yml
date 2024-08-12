@@ -22,7 +22,7 @@ jobs:
 
       - name: Upload file to S3
         run: |
-          aws s3 cp path/to/your/file s3://$S3_BUCKET_NAME/ --recursive
+          aws s3 cp index.html s3://$S3_BUCKET_NAME/ --recursive
         env:
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
