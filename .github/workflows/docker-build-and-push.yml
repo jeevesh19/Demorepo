@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-static-site .
+          docker build -t ${{ secrets.ECR_REPOSITORY_NAME }} .
 
       - name: Tag Docker image
         run: |
-          docker tag my-static-site:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+          docker tag ${{ secrets.ECR_REPOSITORY_NAME }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_NAME }}:latest
 
       - name: Push Docker image to ECR
         run: |
@@ -35,6 +35,6 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
-      ECR_REPOSITORY: ecr-web-image
+      ECR_REPOSITORY_NAME: ${{ secrets.ECR_REPOSITORY_NAME }}  # Use the correct secret name here
 
 
