@@ -1,4 +1,4 @@
-name: Upload to S3 Bucket
+name: Upload to S3
 
 on:
   push:
@@ -16,15 +16,15 @@ jobs:
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ AKIAV7EIGDYC4PKEBAFD }}
-          aws-secret-access-key: ${{ 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 }}
-          aws-region: ${{ us-west-1 }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload file to S3
         run: |
           aws s3 cp path/to/your/file s3://$S3_BUCKET_NAME/ --recursive
         env:
-          S3_BUCKET_NAME: ${{ s3_jeevesh }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
 
 
